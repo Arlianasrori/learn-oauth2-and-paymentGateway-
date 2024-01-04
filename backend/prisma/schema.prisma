@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  email String @id @db.VarChar(160)
+  no_hp String @db.VarChar(12) @unique
+  password String @db.VarChar(160)
+  name String @db.VarChar(160)
+  alamat_id Int @unique @default(autoincrement())
+  seller Boolean @default(false)
+  refresh_token  String?  @db.VarChar(160)
+  refresh_token_seller  String?  @db.VarChar(160)
+
+  alamat alamat?
+  cart cart?
+  product product[]
+  order order[]
+
+
+  @@map("users")
+} 
+
+model alamat {
+  	id Int @id 
+	village String? @db.VarChar(160)
+	subsidtrick String? @db.VarChar(160)
+	regency String @db.VarChar(160)
+	province String @db.VarChar(160) 
+	country String @db.VarChar(160) 
+	kode_pos Int
+
+  users users @relation(fields: [id],references: [alamat_id])
+  @@map("alamat")
+}
+
+model cart {
+	owner String @id @db.VarChar(160)
+  	id Int
+	nama_product String @db.VarChar(160)
+	price Int 
+	category String @db.VarChar(160)
+	sold_by String @db.VarChar(160)
+	total Int
+
+  users users @relation(fields: [owner],references: [email])
+  product product @relation(fields: [id],references: [id])
+}
+
+model product {
+	id Int @id @default(autoincrement())
+	nama_product String @db.VarChar(160)
+	deks String? @db.VarChar(160)
+	price Int
+	category String @db.VarChar(160)
+	stok  Int
+	img String? @db.VarChar(160)
+	sold_by String @db.VarChar(160)
+
+  users users @relation(fields: [sold_by],references: [email])
+  cart cart[]
+}
+
+model order {
+	id_order String @id @db.VarChar(5)
+	payment_using String @db.VarChar(160)
+	email_customer String @db.VarChar(160) 
+	alamat_jalan String? @db.VarChar(160)
+  alamat_village String? @db.VarChar(160) 
+  alamat_subsidtrick String? @db.VarChar(160)
+	alamat_regency String @db.VarChar(160)
+	alamat_province String @db.VarChar(160) 
+	country String @db.VarChar(160) 
+  kode_pos Int
+	product  String  @db.VarChar(5)
+	jumlah_product Int
+	price Int
+	total_price Int
+
+  customer users @relation(fields: [email_customer],references: [email])
+  product_order product_order[]
+
+  @@map("orders")
+
+}
+
+model product_order { 
+  id Int @id @default(autoincrement())
+  id_order String @db.VarChar(5)
+  nama String @db.VarChar(160) 
+  price Int
+  solde_by Int
+  jumlah Int
+
+  order order @relation(fields: [id_order],references: [id_order])
+}
