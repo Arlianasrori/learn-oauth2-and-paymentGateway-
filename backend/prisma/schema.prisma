@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -17,8 +17,8 @@ model users {
   name String @db.VarChar(160)
   alamat_id Int @unique @default(autoincrement())
   seller Boolean @default(false)
-  refresh_token  String?  @db.VarChar(160)
-  refresh_token_seller  String?  @db.VarChar(160)
+  refresh_token  String?  @db.VarChar(500)
+  refresh_token_seller  String?  @db.VarChar(500)
 
   alamat alamat?
   cart cart?

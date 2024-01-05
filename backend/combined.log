@@ -204,3 +204,40 @@
 {"level":"error","message":"\nInvalid `prisma.users.count()` invocation:\n\n\nThe table `users` does not exist in the current database.","service":"user-service","target":"users.count","timestamp":"2024-01-04T12:27:22.293Z"}
 {"level":"info","message":"Starting a mysql pool with 5 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-04T12:33:52.930Z"}
 {"level":"info","message":"Starting a mysql pool with 5 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-04T12:53:11.803Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T05:25:53.088Z"}
+{"level":"error","message":"\nInvalid `prisma.users.update()` invocation:\n\n\nThe provided value for the column is too long for the column's type. Column: (not available)","service":"user-service","target":"users.update","timestamp":"2024-01-05T05:27:00.709Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T05:28:03.099Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:41:07.984Z"}
+{"level":"error","message":"\nInvalid `prisma.product.create()` invocation:\n\n{\n  data: {\n    nama_product: \"sepatu\",\n    deks: \"sangat nyaman digunakan\",\n    price: 30000,\n    catrgory: \"sepatu\",\n    stok: 3,\n    sold_by: \"habil123\",\n    images: \"http://localhost:3000/images/1704436867977-Sii.jpg\",\n+   category: String\n  }\n}\n\nArgument `category` is missing.","service":"user-service","target":"product.create","timestamp":"2024-01-05T06:41:08.038Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:41:45.983Z"}
+{"level":"error","message":"\nInvalid `prisma.product.create()` invocation:\n\n{\n  data: {\n    nama_product: \"sepatu\",\n    deks: \"sangat nyaman digunakan\",\n    price: 30000,\n    category: \"sepatu\",\n    stok: 3,\n    sold_by: \"habil123\",\n    images: \"http://localhost:3000/images/1704436905972-Sii.jpg\",\n    ~~~~~~\n?   id?: Int,\n?   img?: String | Null,\n?   cart?: cartUncheckedCreateNestedManyWithoutProductInput\n  }\n}\n\nUnknown argument `images`. Did you mean `img`? Available options are marked with ?.","service":"user-service","target":"product.create","timestamp":"2024-01-05T06:41:46.032Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:42:31.276Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:43:56.002Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:55:45.398Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:57:14.918Z"}
+{"level":"error","message":"\nInvalid `prisma.product.findUnique()` invocation:\n\n{\n  where: {\n    id: \"1\"\n        ~~~\n  }\n}\n\nArgument `id`: Invalid value provided. Expected Int, provided String.","service":"user-service","target":"product.findUnique","timestamp":"2024-01-05T06:57:14.968Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:58:04.326Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:58:49.488Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:59:43.486Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T06:59:54.489Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:01:53.841Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:02:19.787Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:03:57.567Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:46:15.662Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:46:40.802Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:47:37.389Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:48:07.113Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:48:30.541Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:49:09.907Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:49:58.713Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T07:54:16.399Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:06:34.080Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:25:06.423Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:29:00.924Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:31:25.806Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:31:47.647Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:32:37.027Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:33:12.137Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:33:37.285Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:46:11.278Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-05T08:47:41.902Z"}

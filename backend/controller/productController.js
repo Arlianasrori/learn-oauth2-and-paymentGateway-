@@ -4,34 +4,31 @@ export const add = async (req,res,next) => {
     try {
         const user = req.user
         const body = req.body
-        const images = req.file
-        console.log(user);
-        console.log(body);
-        console.log(images);
-        res.send("hay")
-
-        // const result =await productService.add(body,user,images)
-        // res.status(200).json({
-        //     data : result
-        // })
+        const file = req.files
+        const url = `${req.protocol}://${req.get("host")}/images/`
+    
+        const result = await productService.add(body,user,file,url)
+        res.status(200).json({
+            data : result
+        })
     } catch (error) {
         next(error)
     }
 }
+
+
 export const update = async (req,res,next) => {
     try {
         const body = req.body
-        // const images = req.file.path
-        const identify = req.params.identify
-        console.log(user);
-        console.log(body);
-        // console.log(images);
-        res.send("hay")
+        const file = req.files
+        const identify = parseInt(req.params.identify) 
+        const url = `${req.protocol}://${req.get("host")}/images/`
 
-        // const result =await productService.update(identify,body,images)
-        // res.status(200).json({
-        //     data : result
-        // })
+        const result = await productService.update(identify,body,file,url)
+        res.status(200).json({
+            msg : "succes",
+            data : result
+        })
     } catch (error) {
         next(error)
     }
