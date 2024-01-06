@@ -33,3 +33,59 @@ export const update = async (req,res,next) => {
         next(error)
     }
 }
+export const deleteProduct = async(req,res,next) => {   
+    try {
+        const identify = parseInt(req.params.identify)
+    
+        const result = await productService.deleteProduct(identify)
+        
+        res.status(200).json({
+            msg : "ok",
+            data : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+export const getProductById = async(req,res,next) => {   
+    try {
+        const identify = parseInt(req.params.identify)
+    
+        const result = await productService.getProductById(identify)
+        
+        res.status(200).json({
+            msg : "ok",
+            data : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+export const getAllProduct = async(req,res,next) => {   
+    try {   
+        const result = await productService.getAllProduct()
+        
+        res.status(200).json({
+            msg : "ok",
+            data : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+export const searchProduct = async(req,res,next) => {
+    try {
+        
+        const body = req.body
+    
+        const result = await productService.searchProduct(body)
+
+        res.status(200).json({
+            msg : "ok",
+            data : result
+        })
+        
+    } catch (error) {
+        next(error)
+    }
+}

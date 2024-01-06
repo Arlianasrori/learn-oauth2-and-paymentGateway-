@@ -16,3 +16,9 @@ export const updateProductValidation = joi.object({
     stok : joi.number().positive().optional()
 
 })
+export const getProductByIdentifyValidation = joi.number().positive()
+export const searchProductValidation = joi.object({
+    nama_product : joi.string().max(255).optional(),
+    category : joi.string().max(255).optional(),
+    sold_by : joi.string().max(255).optional(),
+})

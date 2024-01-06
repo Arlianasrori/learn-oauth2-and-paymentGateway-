@@ -90,7 +90,7 @@ const login = async (req) => {
     const user =  await CheckAlreadyExist(result)
 
 
-    const accestoken = jwt.sign(user,process.env.SECRET_KEY,{expiresIn : "30d"})
+    const accestoken = jwt.sign(user,process.env.SECRET_KEY,{expiresIn : "40d"})
     const refreshtoken = jwt.sign(user,process.env.SECRET_REFRESH_TOKEN,{expiresIn : "90d"})
 
     await prismaClient.users.update({

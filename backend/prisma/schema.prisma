@@ -30,7 +30,7 @@ model users {
 } 
 
 model alamat {
-  	id Int @id 
+  id Int @id 
 	village String? @db.VarChar(160)
 	subsidtrick String? @db.VarChar(160)
 	regency String @db.VarChar(160)
@@ -44,15 +44,12 @@ model alamat {
 
 model cart {
 	owner String @id @db.VarChar(160)
-  	id Int
-	nama_product String @db.VarChar(160)
+  id_product Int
+  count Int
 	price Int 
-	category String @db.VarChar(160)
-	sold_by String @db.VarChar(160)
-	total Int
 
   users users @relation(fields: [owner],references: [email])
-  product product @relation(fields: [id],references: [id])
+  product product @relation(fields: [id_product],references: [id])
 }
 
 model product {

@@ -63,7 +63,7 @@ export const loginWithGoogle = (req,res,next) => {
     try {
         res.redirect(authUrl)
     } catch (error) {
-        
+        next(error)
     }
 }
 export const loginWithGoogleCallback = async (req,res,next) => {
@@ -78,11 +78,11 @@ export const loginWithGoogleCallback = async (req,res,next) => {
         })
 
         const {data} = await oauth2.userinfo.get()
+        console.log(data);
         const result = await userService.loginWithGoogle(data)
 
         if(!result.accestoken){
             const googleToken = jwt.sign(data,process.env.SECRET_GOOGLE_KEY,{expiresIn : "1h"})
-            console.log(googleToken);
             return res.cookie("google_token",googleToken,{
                 maxAge : 60 * 1000 * 60,
                 httpOnly : true,
