@@ -249,3 +249,28 @@
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T05:27:27.938Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T05:55:34.959Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T05:59:31.966Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T07:03:11.407Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T07:03:23.424Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T07:03:34.169Z"}
+{"level":"error","message":"\nInvalid `prisma.cart.create()` invocation:\n\n\nUnique constraint failed on the fields: (`owner`)","service":"user-service","target":"cart.create","timestamp":"2024-01-06T07:04:12.007Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T07:24:52.693Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T07:34:59.616Z"}
+{"level":"error","message":"\nInvalid `prisma.cart.create()` invocation:\n\n{\n  data: {\n    id_product: 1,\n    count: 3,\n    owner: \"aabiljr@gmail.com\",\n    price: 90000,\n+   id: Int\n  }\n}\n\nArgument `id` is missing.","service":"user-service","target":"cart.create","timestamp":"2024-01-06T07:35:18.822Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T07:37:47.002Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:23:36.641Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:25:25.939Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:34:06.439Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:35:22.277Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:36:04.854Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:39:28.392Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:41:02.311Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:41:26.706Z"}
+{"level":"error","message":"\nInvalid `prisma.cart.delete()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.","service":"user-service","target":"cart.delete","timestamp":"2024-01-06T08:41:26.766Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:42:01.138Z"}
+{"level":"error","message":"\nInvalid `prisma.cart.delete()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.","service":"user-service","target":"cart.delete","timestamp":"2024-01-06T08:42:01.194Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:42:21.096Z"}
+{"level":"error","message":"\nInvalid `prisma.cart.delete()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.","service":"user-service","target":"cart.delete","timestamp":"2024-01-06T08:42:21.164Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:42:56.502Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:43:35.725Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:45:16.355Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-06T08:45:29.559Z"}

@@ -21,7 +21,7 @@ model users {
   refresh_token_seller  String?  @db.VarChar(500)
 
   alamat alamat?
-  cart cart?
+  cart cart[]
   product product[]
   order order[]
 
@@ -43,7 +43,8 @@ model alamat {
 }
 
 model cart {
-	owner String @id @db.VarChar(160)
+  id Int @id @default(autoincrement())
+	owner String @db.VarChar(160)
   id_product Int
   count Int
 	price Int 
