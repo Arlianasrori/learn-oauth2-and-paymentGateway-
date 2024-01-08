@@ -60,10 +60,17 @@ const deleteCart = async (id,user) => {
     })
 }
 
-const getUser = async (user) => {
+const getCart = async (user) => {
     const cart = await prismaClient.cart.findMany({
         where : {
             owner : user.email
+        },
+        select : {
+            id : true,
+            owner : true,
+            product : true,
+            count : true,
+            price : true
         }
     })
 
@@ -78,5 +85,5 @@ export default {
     addCart,
     updateCount,
     deleteCart,
-    getUser
+    getCart
 }

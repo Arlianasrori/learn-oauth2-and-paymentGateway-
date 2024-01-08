@@ -50,7 +50,7 @@ export const getUser =async (req,res,next) => {
     try {
         const user = req.user
 
-        const result = await cartService.getUser(user)
+        const result = await cartService.getCart(user)
         res.status(200).json({
             msg : "succes",
             data : result

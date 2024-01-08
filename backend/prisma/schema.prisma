@@ -65,10 +65,11 @@ model product {
 
   users users @relation(fields: [sold_by],references: [email])
   cart cart[]
+  product_order product_order[]
 }
 
 model order {
-	id_order String @id @db.VarChar(5)
+	id_order String @id @db.VarChar(255)
 	payment_using String @db.VarChar(160)
 	email_customer String @db.VarChar(160) 
 	alamat_jalan String? @db.VarChar(160)
@@ -78,7 +79,6 @@ model order {
 	alamat_province String @db.VarChar(160) 
 	country String @db.VarChar(160) 
   kode_pos Int
-	product  String  @db.VarChar(5)
 	jumlah_product Int
 	price Int
 	total_price Int
@@ -87,16 +87,16 @@ model order {
   product_order product_order[]
 
   @@map("orders")
-
 }
 
 model product_order { 
   id Int @id @default(autoincrement())
-  id_order String @db.VarChar(5)
-  nama String @db.VarChar(160) 
-  price Int
-  solde_by Int
+  id_product Int 
+  id_order String @db.VarChar(255)
   jumlah Int
+  price Int
 
+  product product @relation(fields: [id_product],references: [id])
   order order @relation(fields: [id_order],references: [id_order])
 }
+
