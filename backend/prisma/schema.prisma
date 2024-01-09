@@ -80,8 +80,8 @@ model order {
 	country String @db.VarChar(160) 
   kode_pos Int
 	jumlah_product Int
-	price Int
 	total_price Int
+  status String @default("pending")
 
   customer users @relation(fields: [email_customer],references: [email])
   product_order product_order[]
@@ -93,8 +93,8 @@ model product_order {
   id Int @id @default(autoincrement())
   id_product Int 
   id_order String @db.VarChar(255)
-  jumlah Int
-  price Int
+  jumlah Int?
+  price Int?
 
   product product @relation(fields: [id_product],references: [id])
   order order @relation(fields: [id_order],references: [id_order])
