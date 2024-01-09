@@ -4,31 +4,32 @@ import { prismaClient } from "../application/database.js";
 import { addOrderValidation } from "../validation/orderValidation.js";
 
 const addProductOrder = async (id_order,product) => {
-    const count = 0
-    const price = 0
+    let count = 0
+    let price = 0
 
-    product.forEach(async (product) => {
+    for (let index = 0; index < product.length; index++) {      
+        product[index].id_order = id_order
+
         const result = await prismaClient.product_order.create({
-            data : product
+            data : product[index]
         })
-        count += result.jumlah
-        price += result.price
-    });
+        count = count + result.jumlah
+        price = price + result.price        
+    }
 
     return {count,price}
 }
 
 
-const addOrder = async(body,user,id_order,product) => {
+const addOrder = async(body,user,product) => {
     body = await validate(addOrderValidation,body)
-    body.id = id_order
     body.email_customer = user.email
 
     const addOrder = await prismaClient.order.create({
         data : body
     })
 
-    const product_order = await addProductOrder(id_order,product)
+    const product_order = await addProductOrder(body.id_order,product)
 
     return prismaClient.order.update({
         where : {
@@ -36,7 +37,27 @@ const addOrder = async(body,user,id_order,product) => {
         },
         data : {
             jumlah_product : product_order.count,
-            price : product_order.price
+            total_price : product_order.price
+        },
+        select : {
+            id_order : true,
+            customer : {
+                select : {
+                    email : true,
+                    no_hp : true                   
+                }
+            },
+            alamat_jalan : true,
+            alamat_village : true,
+            alamat_subsidtrick : true,
+            alamat_regency : true,
+            alamat_province : true,
+            country : true,
+            kode_pos : true,
+            product_order : true,
+            jumlah_product : true,
+            total_price : true,
+            status : true          
         }
     })
 

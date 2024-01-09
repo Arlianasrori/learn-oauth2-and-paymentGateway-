@@ -79,8 +79,8 @@ model order {
 	alamat_province String @db.VarChar(160) 
 	country String @db.VarChar(160) 
   kode_pos Int
-	jumlah_product Int
-	total_price Int
+	jumlah_product Int?
+	total_price Int?
   status String @default("pending")
 
   customer users @relation(fields: [email_customer],references: [email])

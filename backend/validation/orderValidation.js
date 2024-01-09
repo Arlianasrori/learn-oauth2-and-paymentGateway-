@@ -9,5 +9,5 @@ export const addOrderValidation = joi.object({
     alamat_regency : joi.string().max(255).required(),
     alamat_province : joi.string().max(255).required(),
     country : joi.string().max(255).required(),
-    kode_pos : joi.number().max(4).required()
+    kode_pos : joi.number().required()
 })
