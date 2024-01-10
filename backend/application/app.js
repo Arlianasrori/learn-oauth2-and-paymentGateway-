@@ -7,6 +7,7 @@ import { alamatRouter } from "../routes/alamatRouter.js"
 import { productRouter } from "../routes/productRouter.js"
 import { cartRouter } from "../routes/cartRouter.js"
 import { orderRouter } from "../routes/ordeRouter.js"
+import { paymentRouter } from "../payment-Gateway/paymentRoutes.js"
 import fileUpload from "express-fileupload"
 
 
@@ -23,5 +24,6 @@ app.use(alamatRouter)
 app.use(productRouter)
 app.use(cartRouter)
 app.use(orderRouter)
+app.use(paymentRouter)
 
 app.use(errMiddleware.errorMiddleware)

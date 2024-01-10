@@ -8,10 +8,13 @@ const addProductOrder = async (id_order,product) => {
     let price = 0
 
     for (let index = 0; index < product.length; index++) {      
-        product[index].id_order = id_order
-
         const result = await prismaClient.product_order.create({
-            data : product[index]
+            data : {
+                id_product : product[index].id,
+                id_order : id_order,
+                jumlah : product[index].quantity,
+                price : product[index].price
+            }
         })
         count = count + result.jumlah
         price = price + result.price        
@@ -23,8 +26,7 @@ const addProductOrder = async (id_order,product) => {
 
 const addOrder = async(body,user,product) => {
     body = await validate(addOrderValidation,body)
-    body.email_customer = user.email
-
+    body.email_customer = "aabiljr@gmail.com"
     const addOrder = await prismaClient.order.create({
         data : body
     })

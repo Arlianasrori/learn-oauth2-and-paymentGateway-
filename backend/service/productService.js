@@ -103,7 +103,6 @@ const getAllProduct = async () => {
 }
 
 const searchProduct = async(body) => {
-    console.log(body);
     body = await validate(searchProductValidation,body)
 
     const product = await prismaClient.product.findMany({

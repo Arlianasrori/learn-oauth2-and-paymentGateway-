@@ -4,7 +4,7 @@ export const add = async (req,res,next) => {
     try {
         const user = req.user
         const order_detail = req.body.order_detail
-        const productOrder = req.body.product_order
+        const productOrder = req.body.item_details
 
         const result = await orderService.addOrder(order_detail,user,productOrder)
 
