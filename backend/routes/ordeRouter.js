@@ -4,5 +4,5 @@ import { add, updateStatus } from "../controller/orderController.js"
 
 export const orderRouter = express.Router()
 
-orderRouter.post('/order/add',add)
+orderRouter.post('/order/add',authMiddleware,add)
 orderRouter.patch('/order/status/:id_order',authMiddleware,updateStatus)

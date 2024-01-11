@@ -344,3 +344,7 @@
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-10T08:19:14.493Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-10T08:20:22.640Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-10T08:21:34.822Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-10T08:37:20.411Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-10T08:40:03.878Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-11T06:23:35.044Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-11T06:38:12.577Z"}
