@@ -6,7 +6,8 @@ import { addOrderValidation } from "../validation/orderValidation.js";
 import axios from "axios"
 
 const payment = async (body,user) => {
-    const idOrder = "order10"
+    const idOrder = "orde54"
+    console.log(body);
     body.transaction_details.order_id = idOrder
     const auth = btoa(`${process.env.PAYMENT_SERVER_KEY} :`)
 
@@ -20,6 +21,7 @@ const payment = async (body,user) => {
         },
         data : body
     })
+
     body.order_detail.id_order = idOrder
     await axios({
         method : "post",

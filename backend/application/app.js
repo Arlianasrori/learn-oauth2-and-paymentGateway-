@@ -9,6 +9,7 @@ import { cartRouter } from "../routes/cartRouter.js"
 import { orderRouter } from "../routes/ordeRouter.js"
 import { paymentRouter } from "../payment-Gateway/paymentRoutes.js"
 import fileUpload from "express-fileupload"
+import cors from "cors"
 
 
 export const app = express()
@@ -19,6 +20,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended : true}))
 app.use(fileUpload())
 app.use(express.static("public"))
+app.use(cors())
 app.use(userRoute)
 app.use(alamatRouter)
 app.use(productRouter)

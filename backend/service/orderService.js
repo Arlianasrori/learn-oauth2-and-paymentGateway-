@@ -26,7 +26,7 @@ const addProductOrder = async (id_order,product) => {
 
 const addOrder = async(body,user,product) => {
     body = await validate(addOrderValidation,body)
-    body.email_customer = user.email
+    body.email_customer = "aabiljr@gmail.com"
     const addOrder = await prismaClient.order.create({
         data : body
     })
