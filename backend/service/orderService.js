@@ -64,14 +64,12 @@ const addOrder = async(body,user,product) => {
     })
 
 }
-const updateStatus = async(status,id_order) => {
+const updateStatus = async(body,id_order) => {
     return prismaClient.order.update({
         where : {
             id_order : id_order
         },
-        data : {
-            status : status
-        }
+        data : body
     })
 
 }

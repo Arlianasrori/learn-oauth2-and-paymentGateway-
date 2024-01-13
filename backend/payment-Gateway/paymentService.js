@@ -1,13 +1,14 @@
-import { responseError } from "../error/responseError.js";
-import {validate} from "../validation/validaton.js"
-import { prismaClient } from "../application/database.js";
-import { addOrderValidation } from "../validation/orderValidation.js";
+import Randomstring from "randomstring"
 
 import axios from "axios"
 
 const payment = async (body,user) => {
-    const idOrder = "orde54"
-    console.log(body);
+
+    const idOrder = `order-${Randomstring.generate({
+        length : 4,
+        charset: ['numeric']
+    })}`
+    
     body.transaction_details.order_id = idOrder
     const auth = btoa(`${process.env.PAYMENT_SERVER_KEY} :`)
 

@@ -20,7 +20,9 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended : true}))
 app.use(fileUpload())
 app.use(express.static("public"))
-app.use(cors())
+app.use(cors({
+    methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
+}))
 app.use(userRoute)
 app.use(alamatRouter)
 app.use(productRouter)

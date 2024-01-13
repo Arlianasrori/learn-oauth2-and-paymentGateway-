@@ -19,8 +19,8 @@ export const add = async (req,res,next) => {
 export const updateStatus = async (req,res,next) => {
     try {
         const id_order = req.params.id_order
-        const status = req.body.status
-        const result = await orderService.updateStatus(status,id_order)
+        const body = req.body
+        const result = await orderService.updateStatus(body,id_order)
 
         res.status(201).json({
             msg : "succes",
