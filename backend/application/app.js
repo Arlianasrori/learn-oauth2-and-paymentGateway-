@@ -10,6 +10,7 @@ import { orderRouter } from "../routes/ordeRouter.js"
 import { paymentRouter } from "../payment-Gateway/paymentRoutes.js"
 import fileUpload from "express-fileupload"
 import cors from "cors"
+import { corsMiddleware } from "../middleware/corsMiddleware.js"
 
 
 export const app = express()
@@ -20,14 +21,17 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended : true}))
 app.use(fileUpload())
 app.use(express.static("public"))
-app.use(cors({
-    methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
-}))
+app.use((req,res,next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Method', 'GET, POST, PUT, DELETE, OPTIONS')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    next()
+})
+app.use(orderRouter)
 app.use(userRoute)
 app.use(alamatRouter)
 app.use(productRouter)
 app.use(cartRouter)
-app.use(orderRouter)
 app.use(paymentRouter)
 
 app.use(errMiddleware.errorMiddleware)

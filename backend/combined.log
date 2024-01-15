@@ -379,3 +379,24 @@
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-13T08:36:09.960Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-13T08:43:07.221Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-13T08:54:58.727Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T06:38:39.764Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T06:43:26.231Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T06:45:31.922Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T06:47:33.212Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T06:59:11.534Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:01:44.252Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:07:30.041Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:13:27.724Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:28:09.838Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:34:27.669Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:39:04.587Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:40:23.468Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:41:55.947Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:42:50.613Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:45:17.860Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T07:51:16.838Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T08:23:46.837Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T08:32:45.424Z"}
+{"level":"error","message":"\nInvalid `prisma.order.update()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. Record to update not found.","service":"user-service","target":"order.update","timestamp":"2024-01-15T08:33:41.526Z"}
+{"level":"error","message":"\nInvalid `prisma.order.update()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. Record to update not found.","service":"user-service","target":"order.update","timestamp":"2024-01-15T08:34:52.471Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-01-15T08:35:29.731Z"}
