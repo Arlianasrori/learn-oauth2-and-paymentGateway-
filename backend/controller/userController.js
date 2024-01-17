@@ -3,6 +3,7 @@ import userService from "../service/userService.js";
 import { authUrl,oauth2Client } from "../oauth/oauth.js";
 import {google} from "googleapis"
 import jwt from "jsonwebtoken"
+import { redisClient } from "../cache/redisClient.js";
 
 export const register = async (req,res,next) => {
     try {
@@ -33,6 +34,14 @@ export const register = async (req,res,next) => {
         }
         
         const result = await userService.register(user,alamat)
+        console.log("hay");
+        const allUserCache = await redisClient.json.get("getAllUser")
+        console.log(allUserCache);
+        const cache = JSON.parse(allUserCache)
+        console.log(cache);
+        const j = cache.push(result)
+        console.log(j);
+        redisClient.json.set(`getAllUser`,'$',JSON.stringify(j))
         res.status(201).json({
             msg : "succes",
             data : result
@@ -117,13 +126,25 @@ export const logout = async (req,res,next) => {
 
 export const getAllUser = async (req,res,next) => {
     try {
-        const result =await userService.getallUser()
-        console.log(req.cookies);
-
-        res.status(200).json({
-            msg : "succes",
-            data : result
-        })
+        const allUserCache = await redisClient.json.get("getAllUser")
+     
+        if(allUserCache) {
+            console.log("from caching");
+            console.log(JSON.parse(allUserCache));
+            return res.status(200).json({
+                msg : "succes",
+                data : JSON.parse(allUserCache)
+            })
+        }else{
+            console.log("from database");
+            const result =await userService.getallUser()
+            console.log(JSON.stringify(result));
+            redisClient.json.set(`getAllUser`,'$',JSON.stringify(result))
+            res.status(200).json({
+                msg : "succes",
+                data : result
+            })
+        }
     } catch (error) {
         next(error)
     }
