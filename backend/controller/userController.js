@@ -7,21 +7,8 @@ import { redisClient } from "../cache/redisClient.js";
 
 export const register = async (req,res,next) => {
     try {
-        const user = {
-            email : req.body.email,
-            no_hp : req.body.no_hp,
-            name : req.body.name,
-            password : req.body.password,
-
-        }
-        const alamat = {
-            village : req.body.village,
-            subsidtrick : req.body.subsidtrick,
-            regency : req.body.regency,
-            province : req.body.province,
-            country :req.body.country,
-            kode_pos :req.body.kode_pos
-        }
+        const user = req.body.users
+        const alamat = req.body.alamat
 
         const googleToken = req.cookies.google_token
         if(googleToken){
@@ -34,14 +21,14 @@ export const register = async (req,res,next) => {
         }
         
         const result = await userService.register(user,alamat)
-        console.log("hay");
-        const allUserCache = await redisClient.json.get("getAllUser")
-        console.log(allUserCache);
-        const cache = JSON.parse(allUserCache)
-        console.log(cache);
-        const j = cache.push(result)
-        console.log(j);
-        redisClient.json.set(`getAllUser`,'$',JSON.stringify(j))
+ 
+        const allUserCache =JSON.parse( await redisClient.get("getAllUser"))
+
+        if(allUserCache){
+            allUserCache.push(result)
+            redisClient.set(`getAllUser`,JSON.stringify(allUserCache))
+        }
+
         res.status(201).json({
             msg : "succes",
             data : result
@@ -126,20 +113,17 @@ export const logout = async (req,res,next) => {
 
 export const getAllUser = async (req,res,next) => {
     try {
-        const allUserCache = await redisClient.json.get("getAllUser")
+        const allUserCache = JSON.parse(await redisClient.get("getAllUser"))
      
         if(allUserCache) {
-            console.log("from caching");
-            console.log(JSON.parse(allUserCache));
+            console.log("from cache");
             return res.status(200).json({
                 msg : "succes",
-                data : JSON.parse(allUserCache)
+                data : allUserCache
             })
         }else{
-            console.log("from database");
-            const result =await userService.getallUser()
-            console.log(JSON.stringify(result));
-            redisClient.json.set(`getAllUser`,'$',JSON.stringify(result))
+            const result = await userService.getallUser()
+            redisClient.set(`getAllUser`,JSON.stringify(result))
             res.status(200).json({
                 msg : "succes",
                 data : result
@@ -152,13 +136,18 @@ export const getAllUser = async (req,res,next) => {
 export const getSpesifikUser = async (req,res,next) => {
     try {
         const identify = req.params.identify
+        const userCache = JSON.parse(await redisClient.get(`user:${identify}`))
 
-        if(!identify){
-            return res.status(400).json({
-                msg : "masukkan kriteria user"
+        if(userCache){
+            console.log("from cache");
+            return  res.status(200).json({
+                msg : "succes",
+                data : userCache
             })
         }
-        const result =await userService.getSpesifikUser(identify)
+
+        const result = await userService.getSpesifikUser(identify)
+        redisClient.set(`user:${identify}`,JSON.stringify(result))
 
         res.status(200).json({
             msg : "succes",
@@ -189,11 +178,13 @@ export const searchUser = async (req,res,next) => {
     }
 }
 export const updateUser = async (req,res,next) => {
-
     try {
         const user = req.user
         const data = req.body
         const result = await userService.updateUser(user,data)
+        redisClient.del(`user:${result.email}`)
+        redisClient.del(`user:${result.no_hp}`)
+        redisClient.del("getAllUser")
      
         res.status(200).cookie("acces_token",result.token,{
             maxAge : 24 * 60 * 60 * 60,

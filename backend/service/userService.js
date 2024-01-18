@@ -261,6 +261,10 @@ const updateUser = async (user,data) => {
         }
     })
 
+    if(!isUser){
+        throw new responseError(401,"unauthrize")
+    }
+
     const check = await prismaClient.users.findFirst({
         where : {
             OR : [
@@ -275,9 +279,6 @@ const updateUser = async (user,data) => {
     })
 
 
-    if(!isUser){
-        throw new responseError(404,"user is not found")
-    }
     if(check){
         if(data.email == check.email || data.no_hp == check.no_hp){
             throw new responseError(400,"already exist")
