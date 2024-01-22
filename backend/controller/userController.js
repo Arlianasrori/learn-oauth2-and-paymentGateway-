@@ -5,6 +5,8 @@ import {google} from "googleapis"
 import jwt from "jsonwebtoken"
 import { redisClient } from "../cache/redisClient.js";
 
+
+
 export const register = async (req,res,next) => {
     try {
         const user = req.body.users
@@ -22,7 +24,7 @@ export const register = async (req,res,next) => {
         
         const result = await userService.register(user,alamat)
  
-        const allUserCache =JSON.parse( await redisClient.get("getAllUser"))
+        const allUserCache = JSON.parse( await redisClient.get("getAllUser"))
 
         if(allUserCache){
             allUserCache.push(result)
@@ -144,15 +146,15 @@ export const getSpesifikUser = async (req,res,next) => {
                 msg : "succes",
                 data : userCache
             })
+        }else{
+            const result = await userService.getSpesifikUser(identify)
+            redisClient.set(`user:${identify}`,JSON.stringify(result))
+    
+            res.status(200).json({
+                msg : "succes",
+                data : result
+            })
         }
-
-        const result = await userService.getSpesifikUser(identify)
-        redisClient.set(`user:${identify}`,JSON.stringify(result))
-
-        res.status(200).json({
-            msg : "succes",
-            data : result
-        })
     } catch (error) {
         next(error)
     }
