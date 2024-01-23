@@ -146,3 +146,4 @@
 {"level":"error","message":"\nInvalid `prisma.users.create()` invocation:\n\n\nUnique constraint failed on the fields: (`no_hp`)","service":"user-service","target":"users.create","timestamp":"2024-01-17T08:38:32.012Z"}
 {"level":"error","message":"\nInvalid `prisma.users.create()` invocation:\n\n\nUnique constraint failed on the fields: (`no_hp`)","service":"user-service","target":"users.create","timestamp":"2024-01-17T08:47:22.095Z"}
 {"level":"error","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint failed on the field: `cart_id_product_fkey (index)`","service":"user-service","target":"product.delete","timestamp":"2024-01-18T07:25:07.661Z"}
+{"level":"error","message":"\nInvalid `prisma.alamat.create()` invocation:\n\n\nUnique constraint failed on the fields: (`id`)","service":"user-service","target":"alamat.create","timestamp":"2024-01-23T07:26:10.229Z"}

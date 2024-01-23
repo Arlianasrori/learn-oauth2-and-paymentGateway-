@@ -4,6 +4,10 @@ import { authUrl,oauth2Client } from "../oauth/oauth.js";
 import {google} from "googleapis"
 import jwt from "jsonwebtoken"
 import { redisClient } from "../cache/redisClient.js";
+import { sendOtp } from "../application/nodemailer.js";
+import RandomString from "randomstring"
+import { redisOtp } from "../application/redisOtp.js";
+import { sendOtpToUser } from "./controllerUtils.js";
 
 
 
@@ -31,15 +35,30 @@ export const register = async (req,res,next) => {
             redisClient.set(`getAllUser`,JSON.stringify(allUserCache))
         }
 
+       sendOtpToUser(user.email)
+
         res.status(201).json({
             msg : "succes",
-            data : result
+            data : result,
+            messsge : "verify your account"
         })
     } catch (error) {
         next(error)
     }
 }
 
+export const verifyOtp = async (req,res,next) => {
+    try {
+        const body = req.body
+        const result = await userService.verifyOtp(body)
+  
+        res.status(200).json({
+             msg : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 export const login = async (req,res,next) => {
     try {
         const body = req.body

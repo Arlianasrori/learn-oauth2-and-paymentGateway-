@@ -19,6 +19,7 @@ model users {
   seller Boolean @default(false)
   refresh_token  String?  @db.VarChar(500)
   refresh_token_seller  String?  @db.VarChar(500)
+  verify Boolean @default(false)
 
   alamat alamat?
   cart cart[]

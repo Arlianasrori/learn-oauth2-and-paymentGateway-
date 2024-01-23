@@ -4,7 +4,8 @@ import { prismaClient } from "../application/database.js";
 import jwt from "jsonwebtoken";
 import {validate} from "../validation/validaton.js"
 import bcrypt from "bcrypt"
-
+import { redisOtp } from "../application/redisOtp.js";
+import { registerIfNotVerify } from "./serviceUtils.js";
 async function CheckAlreadyExist (result){
     const user = await prismaClient.users.findFirst({
         where : {
@@ -43,18 +44,22 @@ const register = async (user,alamat) => {
     alamat = await validate(alamatValidation,alamat)
 
 
-    const count = await prismaClient.users.count({
+    const cekUser = await prismaClient.users.findUnique({
         where : {
             email : result.email
         }
     })
 
-
-    if(count == 1){
-        throw new responseError(400,"email already exist")
+    if(cekUser){
+        if(!cekUser.verify){
+            const sult = await registerIfNotVerify(result,alamat)
+    
+            return sult
+        }else{
+            throw new responseError(400,"email already exist")
+        }
     }
     result.password = await bcrypt.hashSync(result.password,11)
-
 
     const userRegister = await prismaClient.users.create({
         data : result,
@@ -76,6 +81,36 @@ const register = async (user,alamat) => {
     return {
         user : userRegister,
         alamat : alamatregsiter
+    }
+}
+
+const verifyOtp = async (req) => {
+    const {email,otp} = req
+
+    const userOtp = await redisOtp.get(email)
+    const user = await prismaClient.users.findUnique({
+        where : {
+            email : email
+        }
+    })
+    if(!user){
+        throw new responseError(400,"invalid otp")
+    }else if(user.verify){
+        throw new responseError(400,"user sudah verify")
+    }else{
+        if(userOtp != JSON.parse(otp)) {
+            console.log("hay");
+            throw new responseError(400,"invalid otp")
+        }
+        await prismaClient.users.update({
+            where : {
+                email : email
+            },
+            data : {
+                verify : true
+            }
+        })
+        return "verify succes"
     }
 }
 
@@ -344,5 +379,6 @@ export default {
     searchUser,
     updateUser,
     toBeSeller,
-    loginWithGoogle
+    loginWithGoogle,
+    verifyOtp
 }
