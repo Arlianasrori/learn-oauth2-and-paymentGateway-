@@ -113,7 +113,6 @@ const verifyOtp = async (req) => {
         return "verify succes"
     }
 }
-
 const login = async (req) => {
     let result;
     if(req.email){

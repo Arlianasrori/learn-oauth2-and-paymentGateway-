@@ -3,7 +3,6 @@ import RandomString from "randomstring"
 import { redisOtp } from "../application/redisOtp.js";
 
 export const sendOtpToUser = (email) => {
-    console.log(email);
     const otp = RandomString.generate({
         length : 4,
         charset: ['numeric']
@@ -12,7 +11,7 @@ export const sendOtpToUser = (email) => {
             from: 'bil furniture', 
             to:email,
             subject: "bil furniture otp",
-            html: `verify your account with the code <b>${otp}</b>`         
+            html: `verify your account with the code <b>${otp}</b><br>the code expire after 5 menit`         
     })
-    redisOtp.set(email,otp)
+    redisOtp.setEx(email,5 * 60,otp)
 }

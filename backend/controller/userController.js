@@ -59,6 +59,17 @@ export const verifyOtp = async (req,res,next) => {
         next(error)
     }
 }
+export const sendOtpUlang = async (req,res,next) => {
+    try {
+        const body = req.body       
+        sendOtpToUser(body.email)
+        res.status(200).json({
+             msg : "send otp succes"
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 export const login = async (req,res,next) => {
     try {
         const body = req.body
