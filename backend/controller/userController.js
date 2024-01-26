@@ -32,7 +32,7 @@ export const register = async (req,res,next) => {
 
         if(allUserCache){
             allUserCache.push(result)
-            redisClient.set(`getAllUser`,JSON.stringify(allUserCache))
+            redisClient.setEx(`getAllUser`,60 * 60 * 60,JSON.stringify(allUserCache))
         }
 
        sendOtpToUser(user.email)
@@ -155,7 +155,7 @@ export const getAllUser = async (req,res,next) => {
             })
         }else{
             const result = await userService.getallUser()
-            redisClient.set(`getAllUser`,JSON.stringify(result))
+            redisClient.setEx(`getAllUser`,60 * 60 * 60,JSON.stringify(result))
             res.status(200).json({
                 msg : "succes",
                 data : result
@@ -178,7 +178,7 @@ export const getSpesifikUser = async (req,res,next) => {
             })
         }else{
             const result = await userService.getSpesifikUser(identify)
-            redisClient.set(`user:${identify}`,JSON.stringify(result))
+            redisClient.setEx(`user:${identify}`,60 * 60 * 60,JSON.stringify(result))
     
             res.status(200).json({
                 msg : "succes",
