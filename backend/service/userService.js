@@ -99,7 +99,6 @@ const verifyOtp = async (req) => {
         throw new responseError(400,"user sudah verify")
     }else{
         if(userOtp != JSON.parse(otp)) {
-            console.log("hay");
             throw new responseError(400,"invalid otp")
         }
         await prismaClient.users.update({

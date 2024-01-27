@@ -25,31 +25,30 @@ model users {
   cart cart[]
   product product[]
   order order[]
-  notification notification[]
+  // notification notification[]
   notificationRead notificationRead[]
-
 
   @@map("users")
 } 
 model notification {
   id Int @id @default(autoincrement())
-  user_email String  @db.VarChar(160)
+  user_email String? @db.VarChar(160)
   title String @db.VarChar(255)
   detail String @db.VarChar(5000)
-  category_id Int
   create_at DateTime @default(now())
+  type String @db.VarChar(255)
   
-  category notifCategory @relation(fields: [category_id],references: [id])
-  user users @relation(fields: [user_email],references: [email])
+  // category notifCategory @relation(fields: [category_id],references: [id])
+  // user users @relation(fields: [user_email],references: [email])
   notificationRead notificationRead[] 
 }
 
-model notifCategory {
-  id Int @id @default(autoincrement())
-  type String @db.VarChar(255)
+// model notifCategory {
+//   id Int @id @default(autoincrement())
+//   type String @db.VarChar(255)
 
-  notification notification[]
-}
+//   notification notification[]
+// }
 
 model notificationRead {
   id Int @id @default(autoincrement())
