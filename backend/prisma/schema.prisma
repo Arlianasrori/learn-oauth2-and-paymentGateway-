@@ -25,7 +25,7 @@ model users {
   cart cart[]
   product product[]
   order order[]
-  // notification notification[]
+  notification notification[]
   notificationRead notificationRead[]
 
   @@map("users")
@@ -38,26 +38,19 @@ model notification {
   create_at DateTime @default(now())
   type String @db.VarChar(255)
   
-  // category notifCategory @relation(fields: [category_id],references: [id])
-  // user users @relation(fields: [user_email],references: [email])
+  user users? @relation(fields: [user_email],references: [email])
   notificationRead notificationRead[] 
 }
 
-// model notifCategory {
-//   id Int @id @default(autoincrement())
-//   type String @db.VarChar(255)
-
-//   notification notification[]
-// }
 
 model notificationRead {
   id Int @id @default(autoincrement())
   isread Boolean
-  notification_id Int @unique
-  user_email String @db.VarChar(12)
+  notification_id Int 
+  user_email String? @db.VarChar(255)
 
   notification notification @relation(fields: [notification_id],references: [id])
-  user users @relation(fields: [user_email],references: [email])
+  user users? @relation(fields: [user_email],references: [email])
 }
 
 model alamat {

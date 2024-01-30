@@ -30,9 +30,36 @@ export const getByType = async (req,res,next) => {
     try {
         const type = req.params.type
         const user = req.user.email
-        console.log(user);
 
         const result = await notificationService.getType(type,user)
+        res.status(201).json({
+            msg : "succes",
+            data : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+export const read = async (req,res,next) => {
+    try {
+        const notif_id = parseInt(req.params.notif_id)
+        const user = req.user.email   
+
+        const result = await notificationService.read(notif_id,user)
+        res.status(201).json({
+            msg : "succes",
+            data : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+export const count = async (req,res,next) => {
+    try {
+        const user = req.user.email   
+        console.log("hay");
+
+        const result = await notificationService.count(user)
         res.status(201).json({
             msg : "succes",
             data : result
