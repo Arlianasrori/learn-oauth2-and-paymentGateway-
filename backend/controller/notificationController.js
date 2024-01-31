@@ -57,7 +57,6 @@ export const read = async (req,res,next) => {
 export const count = async (req,res,next) => {
     try {
         const user = req.user.email   
-        console.log("hay");
 
         const result = await notificationService.count(user)
         res.status(201).json({

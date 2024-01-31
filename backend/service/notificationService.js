@@ -12,7 +12,7 @@ const add = async (req) => {
 }
 const get = async (req) => {
    req = await validate(getNotifValidation,req)
-   console.log(req);
+
    const notif = await prismaClient.notification.findMany({
     where : {
         OR : [
@@ -107,8 +107,10 @@ const read = async (req,user) => {
     return notifRead
 }
 const count = async (user) => {
-    const countNotifNotRead = await prismaClient.notification.findMany({
-        where : {        
+    const countNotifNotRead = await prismaClient.notification.count({
+        where : {  
+            AND : [
+                {
                     OR : [
                         {
                             user_email : user
@@ -117,20 +119,18 @@ const count = async (user) => {
                             user_email : null
                         }
                     ]    
-        },
-        select : {
-            id : true,
-            title : true,
-            detail : true,
-            type : true,
-            notificationRead : {
-                where : {
-                    user_email : user,
+                },
+                {
+                    notificationRead : {
+                        none : {
+                            isread : true
+                        }
+                    }
                 }
-            }
+            ]      
         }
     })
-    console.log(countNotifNotRead);
+
     return countNotifNotRead
 }
 
