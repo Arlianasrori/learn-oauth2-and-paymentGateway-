@@ -18,8 +18,6 @@ export const add = async (req,res,next) => {
 }
 export const updateStatus = async (req,res,next) => {
     try {
-        console.log("ini order");
-        console.log(req.body);
         const id_order = req.params.id_order
         const body = req.body
         const result = await orderService.updateStatus(body,id_order)

@@ -3,7 +3,6 @@ import Randomstring from "randomstring"
 import axios from "axios"
 
 const payment = async (body,user) => {
-
     const idOrder = `order-${Randomstring.generate({
         length : 4,
         charset: ['numeric']
@@ -22,6 +21,7 @@ const payment = async (body,user) => {
         },
         data : body
     })
+
 
     body.order_detail.id_order = idOrder
     await axios({

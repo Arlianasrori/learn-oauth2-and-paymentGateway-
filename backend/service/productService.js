@@ -7,6 +7,7 @@ import serviceUtils from "./serviceUtils.js";
 
 const add = async (req,user,file,imageUrl) => {
     req = await validate(addProductValidation,req)
+    console.log(req);
 
     if(file && imageUrl){
         const addFile = await serviceUtils.addFile(file,imageUrl)

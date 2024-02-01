@@ -4,6 +4,7 @@ import { prismaClient } from "../application/database.js";
 import { addNotifValidation, getNotifValidation } from "../validation/notificationValidation.js";
 
 const add = async (req) => {
+    console.log(req);
     req = await validate(addNotifValidation,req)
     const notif = await prismaClient.notification.create({
         data : req
@@ -28,6 +29,7 @@ const get = async (req) => {
         id : true,
         title :true,
         type : true,
+        detail : true,
         user_email : true,
         notificationRead : {
             where : {
@@ -37,7 +39,8 @@ const get = async (req) => {
                 notification_id : true,
                 isread : true
             }
-        }
+        },
+        create_at : true
     }
    })
    if(!notif){
@@ -68,6 +71,7 @@ const getType = async (req,user) => {
                 select : {
                     id : true,
                     title :true,
+                    detail : true,
                     type : true,
                     user_email : true,
                     notificationRead : {
@@ -78,7 +82,8 @@ const getType = async (req,user) => {
                             notification_id : true,
                             isread : true
                         }
-                    }
+                    },
+                    create_at : true
                 }
     })
     if(!notif[0]){
@@ -91,11 +96,28 @@ const read = async (req,user) => {
     const isNotif = await prismaClient.notification.findUnique({
         where :{
             id : notification_id
+        },
+        select : {
+            id : true,
+            title : true,
+            detail : true,
+            type : true,
+            user_email : true,
+            notificationRead : {
+                select : {
+                    isread : true
+                }
+            }
         }
     })
     if(!isNotif){
         throw new responseError(400,"notif is not found")
     }
+
+    if(isNotif.notificationRead[0]){
+        throw new responseError(400,"notif is was read")
+    }
+    
     const notifRead = await prismaClient.notificationRead.create({
         data : {
             notification_id : notification_id,

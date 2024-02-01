@@ -5,7 +5,7 @@ export const validate = async (schema,obj) => {
 
     if(result.error){
         throw new responseError(400,result.error.message)
-        return
+       
     }
 
     return result.value

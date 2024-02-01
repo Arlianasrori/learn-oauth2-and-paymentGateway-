@@ -4,7 +4,7 @@ import { add, count, get, getByType, read } from "../controller/notificationCont
 
 export const notifRouter = express.Router()
 
-notifRouter.post('/notification/add',authMiddleware,add)
+notifRouter.post('/notification/add',add)
 notifRouter.get('/notification',authMiddleware,get)
 notifRouter.get('/notification/:type',authMiddleware,getByType)
 notifRouter.get('/notification/read/:notif_id',authMiddleware,read)

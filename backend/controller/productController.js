@@ -9,10 +9,11 @@ export const add = async (req,res,next) => {
         const url = `${req.protocol}://${req.get("host")}/images/`
     
         const result = await productService.add(body,user,file,url)
-        const allUserCache =JSON.parse( await redisClient.get("allProducts"))
 
+        const allUserCache = JSON.parse( await redisClient.get("allProducts"))
+        
         if(allUserCache){
-            allUserCache.push(allUserCache)
+            allUserCache.push(result)
             redisClient.set(`allProducts`,JSON.stringify(allUserCache))
         }
         res.status(200).json({

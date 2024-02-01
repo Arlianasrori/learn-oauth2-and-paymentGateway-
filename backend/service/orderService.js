@@ -2,12 +2,13 @@ import { responseError } from "../error/responseError.js";
 import {validate} from "../validation/validaton.js"
 import { prismaClient } from "../application/database.js";
 import { addOrderValidation } from "../validation/orderValidation.js";
+import axios from "axios";
 
 const addProductOrder = async (id_order,product) => {
     let count = 0
     let price = 0
-
-    for (let index = 0; index < product.length; index++) {      
+  
+    for (let index = 0; index < product.length; index++) {   
         const result = await prismaClient.product_order.create({
             data : {
                 id_product : product[index].id,
@@ -16,6 +17,7 @@ const addProductOrder = async (id_order,product) => {
                 price : product[index].price
             }
         })
+       
         count = count + result.jumlah
         price = price + result.price        
     }
@@ -65,12 +67,29 @@ const addOrder = async(body,user,product) => {
 
 }
 const updateStatus = async(body,id_order) => {
-    return prismaClient.order.update({
+    const statusUpdate = await prismaClient.order.update({
         where : {
             id_order : id_order
         },
         data : body
     })
+    console.log("hay");
+    const notif = await axios({
+        method : "POST",
+        url : "http://localhost:3000/notification/add",
+        headers : {
+            "Accept" : "application/json",
+            "Content-Type" : "application/json",
+        },
+        data : {
+            "title" : "info",
+            "detail" : `order is ${statusUpdate.status} payment using : ${statusUpdate.payment_using} jumlah product : ${statusUpdate.jumlah_product} total harga : ${statusUpdate.total_price} waktu : ${statusUpdate.update_At}`,
+            "type" : "info",
+            "user_email" : statusUpdate.email_customer
+        }
+    })
+
+    return statusUpdate
 
 }
 

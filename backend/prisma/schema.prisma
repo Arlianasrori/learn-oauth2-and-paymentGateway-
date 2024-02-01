@@ -106,6 +106,8 @@ model order {
 	jumlah_product Int?
 	total_price Int?
   status String @default("pending")
+  create_At DateTime @default(now())
+  update_At DateTime @updatedAt
 
   customer users @relation(fields: [email_customer],references: [email])
   product_order product_order[]
