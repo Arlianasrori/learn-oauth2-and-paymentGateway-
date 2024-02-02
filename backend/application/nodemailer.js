@@ -18,9 +18,9 @@ sendOtp.verify((err,succes) => {
 })
 
 // const j = await sendOtp.sendMail({
-//     from: 'bil furniture', // sender address
+//     fl: "<b>Helloworld?</b>", // html body
+//   });rom: 'bil furniture', // sender address
 //     to: "arlianasrori@gmail.com", // list of receivers
 //     subject: "bil furniture otp", // Subject line
-//     html: "<b>Hello world?</b>", // html body
-//   });
+//     htm 
 // console.log(j);

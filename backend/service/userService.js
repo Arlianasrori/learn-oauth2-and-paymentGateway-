@@ -88,6 +88,7 @@ const verifyOtp = async (req) => {
     const {email,otp} = req
 
     const userOtp = await redisOtp.get(email)
+    console.log(userOtp);
     const user = await prismaClient.users.findUnique({
         where : {
             email : email
@@ -98,7 +99,7 @@ const verifyOtp = async (req) => {
     }else if(user.verify){
         throw new responseError(400,"user sudah verify")
     }else{
-        if(userOtp != JSON.parse(otp)) {
+        if(userOtp != otp) {
             throw new responseError(400,"invalid otp")
         }
         await prismaClient.users.update({

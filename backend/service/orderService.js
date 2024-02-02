@@ -4,12 +4,12 @@ import { prismaClient } from "../application/database.js";
 import { addOrderValidation } from "../validation/orderValidation.js";
 import axios from "axios";
 
-const addProductOrder = async (id_order,product) => {
+const addProductOrder = async (id_order,product,tx) => {
     let count = 0
     let price = 0
   
     for (let index = 0; index < product.length; index++) {   
-        const result = await prismaClient.product_order.create({
+        const result = await tx.product_order.create({
             data : {
                 id_product : product[index].id,
                 id_order : id_order,
@@ -29,41 +29,45 @@ const addProductOrder = async (id_order,product) => {
 const addOrder = async(body,user,product) => {
     body = await validate(addOrderValidation,body)
     body.email_customer = "aabiljr@gmail.com"
-    const addOrder = await prismaClient.order.create({
-        data : body
-    })
+    
+    return prismaClient.$transaction(async (tx) => {
+        const addOrder = await tx.order.create({
+            data : body
+        })
 
-    const product_order = await addProductOrder(body.id_order,product)
-
-    return prismaClient.order.update({
-        where : {
-            id_order : addOrder.id_order
-        },
-        data : {
-            jumlah_product : product_order.count,
-            total_price : product_order.price
-        },
-        select : {
-            id_order : true,
-            customer : {
-                select : {
-                    email : true,
-                    no_hp : true                   
-                }
+        const product_order = await addProductOrder(addOrder.id_order,product,tx)
+        return tx.order.update({
+            where : {
+                id_order : addOrder.id_order
             },
-            alamat_jalan : true,
-            alamat_village : true,
-            alamat_subsidtrick : true,
-            alamat_regency : true,
-            alamat_province : true,
-            country : true,
-            kode_pos : true,
-            product_order : true,
-            jumlah_product : true,
-            total_price : true,
-            status : true          
-        }
+            data : {
+                jumlah_product : product_order.count,
+                total_price : product_order.price
+            },
+            select : {
+                id_order : true,
+                customer : {
+                    select : {
+                        email : true,
+                        no_hp : true                   
+                    }
+                },
+                alamat_jalan : true,
+                alamat_village : true,
+                alamat_subsidtrick : true,
+                alamat_regency : true,
+                alamat_province : true,
+                country : true,
+                kode_pos : true,
+                product_order : true,
+                jumlah_product : true,
+                total_price : true,
+                status : true          
+            }
+        })
     })
+
+
 
 }
 const updateStatus = async(body,id_order) => {

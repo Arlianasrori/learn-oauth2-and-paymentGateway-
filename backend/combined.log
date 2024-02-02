@@ -704,3 +704,46 @@
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-01T08:39:49.812Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-01T09:08:52.877Z"}
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-01T09:09:45.225Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:00:18.371Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:00:18.559Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:02:04.061Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:02:04.170Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:03:08.606Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:04:30.156Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:04:30.267Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:04:38.845Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:05:14.716Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:05:14.823Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:07:22.016Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:07:22.123Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:07:57.205Z"}
+{"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_order_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-02T06:07:57.318Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:10:37.582Z"}
+{"level":"error","message":"\nInvalid `prisma.order.create()` invocation:\n\n\nUnique constraint failed on the fields: (`id_order`)","service":"user-service","target":"order.create","timestamp":"2024-02-02T06:10:48.566Z"}
+{"level":"error","message":"\nInvalid `prisma.order.create()` invocation:\n\n\nUnique constraint failed on the fields: (`id_order`)","service":"user-service","target":"order.create","timestamp":"2024-02-02T06:10:55.781Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:15:56.448Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:21:21.176Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:28:43.296Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:29:34.457Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:30:30.750Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:37:40.191Z"}
+{"level":"error","message":"\nInvalid `prisma.users.findUnique()` invocation:\n\n{\n  where: {\n    email: {\n      email: \"adsfds@gmail.com\",\n      password: \"akbar123\"\n    }\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  }\n}\n\nArgument `email`: Invalid value provided. Expected String, provided Object.","service":"user-service","target":"users.findUnique","timestamp":"2024-02-02T06:37:40.248Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:38:21.515Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:39:16.275Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:41:35.627Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:42:22.418Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:43:26.506Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:49:53.508Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:52:06.140Z"}
+{"level":"error","message":"\nInvalid `prisma.users.create()` invocation:\n\n\nUnique constraint failed on the fields: (`no_hp`)","service":"user-service","target":"users.create","timestamp":"2024-02-02T06:52:06.317Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T06:53:21.648Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T07:06:30.787Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T07:07:18.793Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T07:09:34.480Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T07:17:25.231Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T09:04:21.884Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T09:09:33.295Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T09:10:04.205Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T09:12:04.058Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T09:18:32.125Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-02T09:26:39.589Z"}

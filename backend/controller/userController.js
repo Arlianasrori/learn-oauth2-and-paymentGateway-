@@ -8,6 +8,7 @@ import { sendOtp } from "../application/nodemailer.js";
 import RandomString from "randomstring"
 import { redisOtp } from "../application/redisOtp.js";
 import { sendOtpToUser } from "./controllerUtils.js";
+import { responseError } from "../error/responseError.js";
 
 
 
@@ -50,6 +51,7 @@ export const register = async (req,res,next) => {
 export const verifyOtp = async (req,res,next) => {
     try {
         const body = req.body
+      
         const result = await userService.verifyOtp(body)
   
         res.status(200).json({
@@ -61,8 +63,20 @@ export const verifyOtp = async (req,res,next) => {
 }
 export const sendOtpUlang = async (req,res,next) => {
     try {
-        const body = req.body       
-        sendOtpToUser(body.email)
+        const body = req.body.email   
+        const user = await prismaClient.users.findUnique({
+            where : {
+                email : body
+            }
+        })
+     
+        if(!user){
+            throw new responseError(400,"user not found")
+        }
+        if(user.verify){
+            throw new responseError(400,"user already verified")
+        }   
+        sendOtpToUser(body)
         res.status(200).json({
              msg : "send otp succes"
         })
@@ -74,6 +88,8 @@ export const login = async (req,res,next) => {
     try {
         const body = req.body
         const result = await userService.login(body)
+        // res.setHeader('Set-Cookie', `token=${result}`);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
   
         res.status(200).cookie("acces_token",result.accestoken,{
                 maxAge : 24 * 60 * 60 * 60,
@@ -114,6 +130,8 @@ export const loginWithGoogleCallback = async (req,res,next) => {
             return res.cookie("google_token",googleToken,{
                 maxAge : 60 * 1000 * 60,
                 httpOnly : true,
+                domain: 'http://127.0.0.1:5500',
+                sameSite:'none',
             }).send("hay")
         }
 

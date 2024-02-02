@@ -13,5 +13,6 @@ export const sendOtpToUser = (email) => {
             subject: "bil furniture otp",
             html: `verify your account with the code <b>${otp}</b><br>the code expire after 5 menit`         
     })
+ 
     redisOtp.setEx(email,5 * 60,otp)
 }
