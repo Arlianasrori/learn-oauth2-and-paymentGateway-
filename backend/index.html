@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="SB-Mid-client-VG4pWFH4MCIeD8k4"></script>
+  </head>
+  <body>
+    <button id="pay-button">Pay!</button>
+
+    <script type="text/javascript">     
+      let payButton = document.getElementById('pay-button');
+      payButton.addEventListener('click',async function () {
+        const j = await fetch("http://localhost:3000/users/login",{         
+          method : "post",
+          headers: {
+            'Content-Type': 'application/json',
+          },         
+          credentials : "include",
+          body : JSON.stringify({
+                "email" : "aabiljr@gmail.com",
+                "password" : "akbar123"
+          }),
+        })
+        console.log(await j.json());
+
+            const body = {
+                        "transaction_details": {
+                            "gross_amount": 20000
+                        },
+                        "order_detail" : {
+                            "payment_using" : "BNI",
+                            "alamat_jalan" : "jl pemuda",
+                            "alamat_village" : "rhee loka",
+                            "alamat_subsidtrick" : "rhee",
+                            "alamat_regency" : "sumbawa besar",
+                            "alamat_province" : "NTB",
+                            "country" : "indonesia",
+                            "kode_pos" : 432
+                        },
+                        "item_details": [
+                            {
+                            "id": 1,
+                            "price": 10000,
+                            "quantity": 1,
+                            "name": "Midtrans Bear",
+                            "brand": "Midtrans",
+                            "category": "Toys",
+                            "merchant_name": "Midtrans",
+                            "url": "http://toko/toko1?item=abc"
+                            },
+                            {
+                            "id": 2,
+                            "price": 10000,
+                            "quantity": 1,
+                            "name": "Midtrans Bear",
+                            "brand": "Midtrans",
+                            "category": "Toys",
+                            "merchant_name": "Midtrans",
+                            "url": "http://toko/toko1?item=abc"
+                            }
+                        ]
+                    }
+           
+            const response = await fetch("http://localhost:3000/paymentGateway", {
+                method: 'POST',                
+                headers: {
+                      'Content-Type': 'application/json;charset=utf-8',
+                },
+                credentials : "include",
+                body: JSON.stringify(body)
+            });
+    
+           const token = await response.json()
+           console.log(token);
+         
+           snap.pay(token.data.token,{
+            onSuccess: async function(result){
+              await fetch(`http://localhost:3000/order/status/${result.order_id}`, {
+                method: 'POST',                
+                headers: {
+                      'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify({
+                  status : result.transaction_status,
+                  payment_using : result.payment_type
+                })
+            });
+            },
+            onPending: async function(result){
+              await fetch(`http://localhost:3000/order/status/${result.order_id}`, {
+                method: 'POST',                
+                headers: {
+                      'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify({
+                  status : result.transaction_status,
+                  payment_using : result.payment_type
+                })
+            });
+            },
+            onError: async function(result){
+              await fetch(`http://localhost:3000/order/status/${result.order_id}`, {
+                method: 'POST',                
+                headers: {
+                      'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify({
+                  status : result.transaction_status,
+                  payment_using : result.payment_type
+                })
+            });
+            },
+            onClose: async function(){             
+              await fetch(`http://localhost:3000/order/status/${result.order_id}`, {
+                method: 'POST',                
+                headers: {
+                      'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify({
+                  status : result.transaction_status,
+                  payment_using : result.payment_type
+                })
+            });
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

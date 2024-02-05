@@ -4,9 +4,6 @@ import { authUrl,oauth2Client } from "../oauth/oauth.js";
 import {google} from "googleapis"
 import jwt from "jsonwebtoken"
 import { redisClient } from "../cache/redisClient.js";
-import { sendOtp } from "../application/nodemailer.js";
-import RandomString from "randomstring"
-import { redisOtp } from "../application/redisOtp.js";
 import { sendOtpToUser } from "./controllerUtils.js";
 import { responseError } from "../error/responseError.js";
 
@@ -88,12 +85,13 @@ export const login = async (req,res,next) => {
     try {
         const body = req.body
         const result = await userService.login(body)
-        // res.setHeader('Set-Cookie', `token=${result}`);
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
   
         res.status(200).cookie("acces_token",result.accestoken,{
                 maxAge : 24 * 60 * 60 * 60,
-                httpOnly : true,
+                maxAge : 24 * 60 * 60 * 60,
+                httpOnly: true,
+                sameSite: 'None',
+                secure: true
         }).json({
                 acces_token : result.accestoken,
                 refresh_token : result.refreshtoken
@@ -131,13 +129,14 @@ export const loginWithGoogleCallback = async (req,res,next) => {
                 maxAge : 60 * 1000 * 60,
                 httpOnly : true,
                 domain: 'http://127.0.0.1:5500',
-                sameSite:'none',
+                sameSite:'None',
             }).send("hay")
         }
 
         res.status(200).cookie("acces_token",result.accestoken,{
             maxAge : 24 * 60 * 60 * 60,
             httpOnly : true,
+            
         }).json({
                 acces_token : result.accestoken,
                 refresh_token : result.refreshtoken

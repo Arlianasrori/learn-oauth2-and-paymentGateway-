@@ -3,6 +3,8 @@ import {validate} from "../validation/validaton.js"
 import { prismaClient } from "../application/database.js";
 import { addOrderValidation } from "../validation/orderValidation.js";
 import axios from "axios";
+import pdf from "pdf-creator-node"
+import fs from "fs"
 
 const addProductOrder = async (id_order,product,tx) => {
     let count = 0
@@ -97,8 +99,55 @@ const updateStatus = async(body,id_order) => {
 
 }
 
+const getPdf = async (req) => {
+    let pathFile = "./public/pdf"
+    let fileName = "order.pdf"
+    let fullPath = pathFile + '/' + fileName
+    let html = fs.readFileSync("./template.html","utf-8").toString()
+    console.log(html);
+    let options = {
+        format: "A4",
+        orientation: "portrait",
+        border: "10mm",
+        header: {
+            height: "45mm",
+            contents: '<div style="text-align: center;">Author: Shyam Hajare</div>'
+        },
+        footer: {
+            height: "28mm",
+            contents: {
+                first: 'Cover page',
+                2: 'Second page', // Any page number is working. 1-based index
+                default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
+                last: 'Last Page'
+            }
+        }
+    };
+    let users = [
+        {
+            order_id : 1,
+            name : "hay bro"
+        },
+        {
+            order_id : 2,
+            name : "hay bro"
+        }
+      ];
+    let document = {
+        html: html,
+        data: {
+          orders: users,
+        },
+        path: fullPath,
+        type: "",
+      };
+    let process = await pdf.create(document,options)
+    return "hay"
+}
+
 export default {
     addOrder,
-    updateStatus
+    updateStatus,
+    getPdf
 }
 

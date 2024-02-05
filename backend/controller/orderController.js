@@ -30,3 +30,14 @@ export const updateStatus = async (req,res,next) => {
         next(error)
     }
 }
+export const getPdf = async (req,res,next) => {
+    try {
+        const result = await orderService.getPdf()
+        res.status(201).json({
+            msg : "succes",
+            data : result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
