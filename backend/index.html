@@ -22,9 +22,8 @@
                 "password" : "akbar123"
           }),
         })
-        console.log(await j.json());
 
-            const body = {
+        const body = {
                         "transaction_details": {
                             "gross_amount": 20000
                         },
@@ -60,7 +59,7 @@
                             "url": "http://toko/toko1?item=abc"
                             }
                         ]
-                    }
+                      }
            
             const response = await fetch("http://localhost:3000/paymentGateway", {
                 method: 'POST',                

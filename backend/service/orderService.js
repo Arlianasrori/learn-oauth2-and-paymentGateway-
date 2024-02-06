@@ -104,39 +104,69 @@ const getPdf = async (req) => {
     let fileName = "order.pdf"
     let fullPath = pathFile + '/' + fileName
     let html = fs.readFileSync("./template.html","utf-8").toString()
-    console.log(html);
     let options = {
         format: "A4",
         orientation: "portrait",
         border: "10mm",
         header: {
             height: "45mm",
-            contents: '<div style="text-align: center;">Author: Shyam Hajare</div>'
+            contents: `<h1 style="text-align: center;">Bil furniture</h1>
+            <p style="text-align: center;font-size: 22px;">www.bilFutniture.com</p>
+            <div style="width: 100%; height: 0; border: 2px dashed black;"></div>`
         },
-        footer: {
-            height: "28mm",
-            contents: {
-                first: 'Cover page',
-                2: 'Second page', // Any page number is working. 1-based index
-                default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-                last: 'Last Page'
-            }
-        }
+        // footer: {
+        //     height: "28mm",
+        //     contents: {
+        //         first: 1,
+        //         2: 2, 
+        //         default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
+        //         last: 'Last Page'
+        //     }
+        // }
     };
-    let users = [
+    const order = await prismaClient.order.findUnique({
+        where : {
+            id_order : "order-6212"
+        },
+        select : {
+          id_order : true,
+          email_customer : true,
+          kode_pos : true,
+          payment_using : true,   
+          jumlah_product : true,
+          product_order : {
+            select : {
+                product : true,
+                jumlah : true,
+                price : true
+            }
+          },
+          customer : true,
+          update_At : true
+        }
+    })
+    console.log(order);
+    var users = [
         {
-            order_id : 1,
-            name : "hay bro"
+          name: "Shyam",
+          age: "26",
         },
         {
-            order_id : 2,
-            name : "hay bro"
-        }
+          name: "Navjot",
+          age: "26",
+        },
+        {
+          name: "Vitthal",
+          age: "26",
+        },
       ];
+
     let document = {
         html: html,
         data: {
-          orders: users,
+          users : users,
+          order : order,
+          product : order.product_order
         },
         path: fullPath,
         type: "",
