@@ -79,8 +79,7 @@ const updateStatus = async(body,id_order) => {
         },
         data : body
     })
-    console.log("hay");
-    const notif = await axios({
+    await axios({
         method : "POST",
         url : "http://localhost:3000/notification/add",
         headers : {
@@ -99,34 +98,20 @@ const updateStatus = async(body,id_order) => {
 
 }
 
-const getPdf = async (req) => {
+const getPdf = async (req,date) => {
+    console.log(date);
     let pathFile = "./public/pdf"
-    let fileName = "order.pdf"
+    let fileName = `${req}.pdf`
     let fullPath = pathFile + '/' + fileName
     let html = fs.readFileSync("./template.html","utf-8").toString()
     let options = {
         format: "A4",
         orientation: "portrait",
         border: "10mm",
-        header: {
-            height: "45mm",
-            contents: `<h1 style="text-align: center;">Bil furniture</h1>
-            <p style="text-align: center;font-size: 22px;">www.bilFutniture.com</p>
-            <div style="width: 100%; height: 0; border: 2px dashed black;"></div>`
-        },
-        // footer: {
-        //     height: "28mm",
-        //     contents: {
-        //         first: 1,
-        //         2: 2, 
-        //         default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-        //         last: 'Last Page'
-        //     }
-        // }
     };
     const order = await prismaClient.order.findUnique({
         where : {
-            id_order : "order-6212"
+            id_order : req
         },
         select : {
           id_order : true,
@@ -141,39 +126,27 @@ const getPdf = async (req) => {
                 price : true
             }
           },
+          total_price : true,
           customer : true,
           update_At : true
         }
     })
-    console.log(order);
-    var users = [
-        {
-          name: "Shyam",
-          age: "26",
-        },
-        {
-          name: "Navjot",
-          age: "26",
-        },
-        {
-          name: "Vitthal",
-          age: "26",
-        },
-      ];
+
 
     let document = {
         html: html,
         data: {
-          users : users,
           order : order,
-          product : order.product_order
+          product : order.product_order,
+          date : date
         },
         path: fullPath,
         type: "",
       };
-    let process = await pdf.create(document,options)
-    return "hay"
+    return pdf.create(document,options)  
 }
+
+
 
 export default {
     addOrder,

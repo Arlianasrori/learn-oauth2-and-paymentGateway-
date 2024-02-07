@@ -3,7 +3,6 @@ import notificationService from "../service/notificationService.js";
 export const add = async (req,res,next) => {
     try {
         const data = req.body
-        console.log(data);
 
         const result = await notificationService.add(data)
         res.status(201).json({

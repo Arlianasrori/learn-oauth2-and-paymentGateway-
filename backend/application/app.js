@@ -27,7 +27,6 @@ app.use(cors({
     allowedHeaders : "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept",
     origin : "http://127.0.0.1:5500",
 }))
-app.set("trusty proxy")
 app.use(userRoute)
 app.use(orderRouter)
 app.use(alamatRouter)

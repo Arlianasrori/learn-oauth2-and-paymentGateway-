@@ -6,25 +6,26 @@
     <title>order report</title>
 </head>
 <body>
-  
+    <h1 style="text-align: center;">Bil furniture</h1>
+        <p style="text-align: center;font-size: 22px;">www.bilFutniture.com</p>
+         <div style="width: 100%; height: 0; border: 2px dashed black;"></div>
     <div>
         <h1 style="text-align: center;">{{order.email_customer}}</h1>
         <p style="margin-left: 100px;">Order no : {{order.id_order}}</p>
-        <p style="margin-left: 168px;">{{order.update_At}}</p>
+        <p style="margin-left: 168px;">{{date}}</p>
     </div>
     <div style="width: 100%; height: 0; border: 2px dashed black;"></div>
 
     {{#each order.product_order}}
-    <p><span style="display: inline-block;width: 500px;">{{this.jumlah}} {{this.product_order.product.nama_product}}</span><span style="display: inline-block;width: 200px;">11.500</span></p>
-    <br />
+    <p><span style="display: inline-block;width: 500px;">{{this.jumlah}} {{this.product.nama_product}}</span><span style="display: inline-block;width: 200px;">{{this.product.price}}</span></p>
     {{/each}}
   
-
     <div>
-        <p><span style="display: inline-block;width: 500px;">Sub total :</span><span style="display: inline-block;width: 200px;">11.500</span></p>
-        <p><span style="display: inline-block;width: 500px;">total :</span><span style="display: inline-block;width: 200px;">11.500</span></p>
-        <p><span style="display: inline-block;width: 500px;">payment using :</span><span style="display: inline-block;width: 200px;">BRI</span></p>
+        <p><span style="display: inline-block;width: 500px;">Sub total :</span><span style="display: inline-block;width: 200px;">{{order.total_price}}</span></p>
+        <p><span style="display: inline-block;width: 500px;">Total :</span><span style="display: inline-block;width: 200px;">{{order.total_price}}</span></p>
+        <p><span style="display: inline-block;width: 500px;">Payment Method :</span><span style="display: inline-block;width: 200px;">{{order.payment_using}}</span></p>
     </div>
+    <div style="width: 100%; height: 0; border: 2px dashed black;"></div>
     <div>
         <p style="text-align: center;font-size: 23px;margin-top: 60px;">40001 closed may 2023</p>
     </div>

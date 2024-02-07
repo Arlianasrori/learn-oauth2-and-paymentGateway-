@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>order succes</title>
+</head>
+<body>
+    <h1>order succes</h1>
+    <button class="download">download</button>
+    <a href="http://localhost:3000/order/download/order-4950.pdf">download</a>
+    <script>
+        const download = document.querySelector(".download")
+        download.addEventListener("click",(e) => {
+            const order_id = localStorage.getItem("order_id")
+            window.location.href = `http://localhost:3000/order/download/${order_id}.pdf`
+        })
+    </script>
+</body>
+</html>

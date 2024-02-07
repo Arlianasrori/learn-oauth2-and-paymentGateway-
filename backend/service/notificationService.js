@@ -4,7 +4,6 @@ import { prismaClient } from "../application/database.js";
 import { addNotifValidation, getNotifValidation } from "../validation/notificationValidation.js";
 
 const add = async (req) => {
-    console.log(req);
     req = await validate(addNotifValidation,req)
     const notif = await prismaClient.notification.create({
         data : req
