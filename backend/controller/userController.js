@@ -90,7 +90,7 @@ export const login = async (req,res,next) => {
                 maxAge : 24 * 60 * 60 * 60,
                 httpOnly: true,
                 sameSite: 'None',
-                secure: true
+                // secure: true
         }).json({
                 acces_token : result.accestoken,
                 refresh_token : result.refreshtoken

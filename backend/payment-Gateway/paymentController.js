@@ -7,7 +7,12 @@ export const paymentController = async (req,res,next) => {
      
         const result = await payment(body,user)
 
-        res.status(200).json({
+        res.status(200).cookie("acces_token","hay",{
+            maxAge : 24 * 60 * 60 * 60,
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true
+    }).json({
             data : result
         })
     } catch (error) {

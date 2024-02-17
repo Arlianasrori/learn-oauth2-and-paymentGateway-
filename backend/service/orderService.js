@@ -4,7 +4,9 @@ import { prismaClient } from "../application/database.js";
 import { addOrderValidation } from "../validation/orderValidation.js";
 import axios from "axios";
 import pdf from "pdf-creator-node"
-import fs from "fs"
+import fs from 'fs'
+import puppeteer from "puppeteer";
+import mustache from "mustache"
 
 const addProductOrder = async (id_order,product,tx) => {
     let count = 0
@@ -99,51 +101,54 @@ const updateStatus = async(body,id_order) => {
 }
 
 const getPdf = async (req,date) => {
-    console.log(date);
-    let pathFile = "./public/pdf"
-    let fileName = `${req}.pdf`
-    let fullPath = pathFile + '/' + fileName
-    let html = fs.readFileSync("./template.html","utf-8").toString()
-    let options = {
-        format: "A4",
-        orientation: "portrait",
-        border: "10mm",
-    };
-    const order = await prismaClient.order.findUnique({
-        where : {
-            id_order : req
-        },
-        select : {
-          id_order : true,
-          email_customer : true,
-          kode_pos : true,
-          payment_using : true,   
-          jumlah_product : true,
-          product_order : {
+        let pathFile = "./public/pdf"
+        let fileName = `${req}.pdf`
+
+        let fullPath = pathFile + '/' + fileName
+        let html = fs.readFileSync("./template.html","utf-8").toString()
+        const order = await prismaClient.order.findUnique({
+            where : {
+                id_order : req
+            },
             select : {
-                product : true,
-                jumlah : true,
-                price : true
+            id_order : true,
+            email_customer : true,
+            kode_pos : true,
+            payment_using : true,   
+            jumlah_product : true,
+            product_order : {
+                select : {
+                    product : true,
+                    jumlah : true,
+                    price : true
+                }
+            },
+            total_price : true,
+            customer : true,
+            alamat_jalan : true,
+            alamat_regency : true,
+            alamat_province : true,
+            update_At : true
             }
-          },
-          total_price : true,
-          customer : true,
-          update_At : true
-        }
-    })
+        })
+        const tanggal =  order.update_At.toString().split(" ")
+        console.log(tanggal);
 
-
-    let document = {
-        html: html,
-        data: {
+  
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        const data = {
           order : order,
           product : order.product_order,
-          date : date
-        },
-        path: fullPath,
-        type: "",
-      };
-    return pdf.create(document,options)  
+          date : tanggal
+        }
+        console.log(data.product.product);
+        await page.setContent(mustache.render(html, data));
+        await page.pdf({ format: 'A6',path : fullPath});
+      
+        page.close();
+        browser.close();
+        return "succes"
 }
 
 
