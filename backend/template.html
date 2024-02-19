@@ -9,8 +9,6 @@
 				max-width: 800px;
 				margin: auto;
 				padding: 30px;
-				border: 1px solid #eee;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 				font-size: 16px;
 				line-height: 24px;
 				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
@@ -96,6 +94,7 @@
 			.invoice-box.rtl table tr td:nth-child(2) {
 				text-align: left;
 			}
+			/* @page { margin: 0; width: 216mm; height: 279mm } */
 		</style>
 	</head>
 
@@ -109,13 +108,13 @@
 								<td class="title">
 									<img
 										src="https://sparksuite.github.io/simple-html-invoice-template/images/logo.png"
-										style="width: 100%; max-width: 300px"
+										style="width: 100%; max-width: 200px"
 									/>
 								</td>
 
 								<td>
 									{{order.id_order}}<br />
-                  {{date}}
+                  					{{date}}
 								</td>
 							</tr>
 						</table>
@@ -161,9 +160,8 @@
         {{#product}}
 				<tr class="item">
 					<td>{{product.nama_product}}</td>
-
 					<td>{{price}}</td>
-				</tr>
+				</tr>													
         {{/product}}
 
 				<tr class="total">
@@ -173,5 +171,13 @@
 				</tr>
 			</table>
 		</div>
+		<script>
+			var body = document.body,
+    		html = document.documentElement;
+
+			var height = Math.max( body.scrollHeight, body.offsetHeight, 
+            html.clientHeight, html.scrollHeight, html.offsetHeight );
+			console.log(height);
+		</script>
 	</body>
 </html>

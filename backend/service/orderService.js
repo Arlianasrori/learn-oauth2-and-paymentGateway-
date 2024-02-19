@@ -3,7 +3,6 @@ import {validate} from "../validation/validaton.js"
 import { prismaClient } from "../application/database.js";
 import { addOrderValidation } from "../validation/orderValidation.js";
 import axios from "axios";
-import pdf from "pdf-creator-node"
 import fs from 'fs'
 import puppeteer from "puppeteer";
 import mustache from "mustache"
@@ -132,7 +131,6 @@ const getPdf = async (req,date) => {
             }
         })
         const tanggal =  order.update_At.toString().split(" ")
-        console.log(tanggal);
 
   
         const browser = await puppeteer.launch();
@@ -140,11 +138,15 @@ const getPdf = async (req,date) => {
         const data = {
           order : order,
           product : order.product_order,
-          date : tanggal
+          date : `${tanggal[0]} ${tanggal[1]} ${tanggal[2]} ${tanggal[3]} ${tanggal[4]}`
         }
-        console.log(data.product.product);
+       
         await page.setContent(mustache.render(html, data));
-        await page.pdf({ format: 'A6',path : fullPath});
+        const height = await page.$("html")
+        const heightPage = await height.boundingBox()
+        const heightReal = heightPage.height + 100
+       
+        await page.pdf({ width : "125mm",path : fullPath,height : heightReal+'px'});
       
         page.close();
         browser.close();
