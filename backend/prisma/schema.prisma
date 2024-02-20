@@ -108,6 +108,7 @@ model order {
   status String @default("pending")
   create_At DateTime @default(now())
   update_At DateTime @updatedAt
+  transaction_id String? @db.VarChar(255)
 
   customer users @relation(fields: [email_customer],references: [email])
   product_order product_order[]

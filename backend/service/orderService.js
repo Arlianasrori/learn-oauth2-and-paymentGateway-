@@ -6,6 +6,7 @@ import axios from "axios";
 import fs from 'fs'
 import puppeteer from "puppeteer";
 import mustache from "mustache"
+import serviceUtils from "./serviceUtils.js";
 
 const addProductOrder = async (id_order,product,tx) => {
     let count = 0
@@ -99,7 +100,8 @@ const updateStatus = async(body,id_order) => {
 
 }
 
-const getPdf = async (req,date) => {
+const getPdf = async (req,transaction_id) => {
+        await serviceUtils.createQrcode(req,transaction_id)
         let pathFile = "./public/pdf"
         let fileName = `${req}.pdf`
 
@@ -138,7 +140,8 @@ const getPdf = async (req,date) => {
         const data = {
           order : order,
           product : order.product_order,
-          date : `${tanggal[0]} ${tanggal[1]} ${tanggal[2]} ${tanggal[3]} ${tanggal[4]}`
+          date : `${tanggal[0]} ${tanggal[1]} ${tanggal[2]} ${tanggal[3]} ${tanggal[4]}`,
+          recipt : `http://localhost:3000/qrcode/qrcode-${req}.png`
         }
        
         await page.setContent(mustache.render(html, data));
@@ -150,14 +153,28 @@ const getPdf = async (req,date) => {
       
         page.close();
         browser.close();
+        console.log("hay");
         return "succes"
 }
 
+const cekStruk = async (order_id,transaction_id) => {
+    const order = await prismaClient.order.findUnique({
+        where : {
+            id_order : order_id
+        }
+    })
+    if(!order || order.transaction_id != transaction_id) {
+        throw new responseError(400,"This receipt is not from our side")
+    }
+
+    return "succes"
+} 
 
 
 export default {
     addOrder,
     updateStatus,
-    getPdf
+    getPdf,
+    cekStruk
 }
 

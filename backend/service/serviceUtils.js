@@ -2,6 +2,7 @@ import fs from "fs"
 import { prismaClient } from "../application/database.js"
 import { responseError } from "../error/responseError.js"
 import bcrypt from "bcrypt"
+import qrcode from "qrcode"
 const addFile = async (file,imageUrl) => {
     const nameFile = new Date().getTime() + "-" + file.images.name
     imageUrl = imageUrl + nameFile
@@ -48,15 +49,20 @@ export const registerIfNotVerify = async (result,alamat) => {
        },
        data : alamat
     })
-    console.log("njir");
+
     return {
         user : updateUser,
         alamat : alamatregsiter
     }
 
 }
+
+const createQrcode = async (order_id,transaction_id) => {
+    return qrcode.toFile(`./public/qrcode/qrcode-${order_id}.png`,`http://localhost:3000/checkTherecipti/${order_id}/${transaction_id}`)
+}
 export default {
     addFile,
     deleteFile,
-    checkAccesCart
+    checkAccesCart,
+    createQrcode
 }

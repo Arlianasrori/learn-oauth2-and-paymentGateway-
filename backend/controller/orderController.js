@@ -35,9 +35,9 @@ export const updateStatus = async (req,res,next) => {
 export const getPdf = async (req,res,next) => {
     try {
         const order_id = req.params.order_id
-        const date = req.body.date
+        const transaction_id = req.body.transaction_id
 
-        const result = await orderService.getPdf(order_id,date)
+        const result = await orderService.getPdf(order_id,transaction_id)
         res.status(201).json({
             msg : "succes",
             data : result
@@ -56,4 +56,18 @@ export const download = async (req,res,next) => {
             })
         }
     })
+}
+
+export const cekStruk = async (req,res,next) => {
+    try {
+        const orderId = req.params.order_id
+        const transaction_id = req.params.transaction_id
+
+        const result = await orderService.cekStruk(orderId,transaction_id)
+        res.status(200).json({
+            msg : "succes"
+        })
+    } catch (error) {
+        next(error)
+    }
 }
