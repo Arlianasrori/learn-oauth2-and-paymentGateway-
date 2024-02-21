@@ -58,7 +58,7 @@ export const registerIfNotVerify = async (result,alamat) => {
 }
 
 const createQrcode = async (order_id,transaction_id) => {
-    return qrcode.toFile(`./public/qrcode/qrcode-${order_id}.png`,`http://localhost:3000/checkTherecipti/${order_id}/${transaction_id}`)
+    return qrcode.toFile(`./public/qrcode/qrcode-${order_id}.png`,`http://localhost:3000/checkTherecipti?o="${order_id}"&t="${transaction_id}"`,{  quality: 0.3,margin: 1})
 }
 export default {
     addFile,

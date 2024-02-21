@@ -7,19 +7,20 @@
 </head>
 <body>
     <h1>order succes</h1>
-    <embed src="public/pdf/order-1086.pdf" type="" width="100%"  height="600px">
+    <embed class="pdf"  type="application/pdf"  width="100%"  height="600px">
     <button class="download">download</button>
     <button class="read-pdf">lihat pdf</button>
 
     <script>
         const download = document.querySelector(".download")
         const read = document.querySelector(".read-pdf")
+        const pdf = document.querySelector(".pdf")
+        const order_id = localStorage.getItem("order_id")
+        pdf.setAttribute("src",`public/pdf/${order_id}.pdf`)
         download.addEventListener("click",(e) => {
-            const order_id = localStorage.getItem("order_id")
             window.location.href = `http://localhost:3000/order/download/${order_id}.pdf`
         })
         read.addEventListener("click",(e) => {
-            const order_id = localStorage.getItem("order_id")
             window.location.href = `http://localhost:3000/pdf/${order_id}.pdf`
         })
     </script>

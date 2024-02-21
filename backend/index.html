@@ -71,7 +71,6 @@
             });
     
            const token = await response.json()
-           console.log(token);
          
            snap.pay(token.data.token,{
             onSuccess: async function(result){
@@ -86,8 +85,8 @@
                   transaction_id : result.transaction_id
                 })
             });
-            console.log(result);
-              await fetch(`http://localhost:3000/order/getPdf/${result.order_id}`, {
+            console.log(result.order_id);
+              fetch(`http://localhost:3000/order/getPdf/${result.order_id}`, {
                 method: 'POST',                
                 headers: {
                       'Content-Type': 'application/json;charset=utf-8',
@@ -96,8 +95,8 @@
                     transaction_id : result.transaction_id,
                 })
             });
-            localStorage.setItem('order_id',result.order_id);
             console.log("hay");
+            localStorage.setItem('order_id',result.order_id);
             window.location.href = `http://127.0.0.1:5500/backend/orderSucces.html`
             },
             onPending: async function(result){

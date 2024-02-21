@@ -60,8 +60,9 @@ export const download = async (req,res,next) => {
 
 export const cekStruk = async (req,res,next) => {
     try {
-        const orderId = req.params.order_id
-        const transaction_id = req.params.transaction_id
+        const orderId = req.query.o
+        const transaction_id = req.query.t
+        console.log(orderId);
 
         const result = await orderService.cekStruk(orderId,transaction_id)
         res.status(200).json({

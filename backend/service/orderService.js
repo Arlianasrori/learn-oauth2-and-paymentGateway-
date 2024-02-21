@@ -101,7 +101,7 @@ const updateStatus = async(body,id_order) => {
 }
 
 const getPdf = async (req,transaction_id) => {
-        await serviceUtils.createQrcode(req,transaction_id)
+ 
         let pathFile = "./public/pdf"
         let fileName = `${req}.pdf`
 
@@ -132,6 +132,10 @@ const getPdf = async (req,transaction_id) => {
             update_At : true
             }
         })
+        if(!order) {
+            throw new responseError(404,"order not found")
+        }
+        await serviceUtils.createQrcode(req,transaction_id)
         const tanggal =  order.update_At.toString().split(" ")
 
   
@@ -153,7 +157,7 @@ const getPdf = async (req,transaction_id) => {
       
         page.close();
         browser.close();
-        console.log("hay");
+
         return "succes"
 }
 
@@ -163,11 +167,12 @@ const cekStruk = async (order_id,transaction_id) => {
             id_order : order_id
         }
     })
+
     if(!order || order.transaction_id != transaction_id) {
         throw new responseError(400,"This receipt is not from our side")
     }
 
-    return "succes"
+    return "This receipt does come from our website"
 } 
 
 
