@@ -957,3 +957,6 @@
 {"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-21T06:49:05.805Z"}
 {"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_product_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-21T06:49:06.381Z"}
 {"level":"error","message":"\nInvalid `prisma.product_order.create()` invocation:\n\n\nForeign key constraint failed on the field: `product_order_id_product_fkey (index)`","service":"user-service","target":"product_order.create","timestamp":"2024-02-21T06:49:21.045Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-23T06:23:33.476Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-24T06:38:09.995Z"}
+{"level":"info","message":"Starting a postgresql pool with 13 connections.","service":"user-service","target":"quaint::pooled","timestamp":"2024-02-24T07:08:39.435Z"}

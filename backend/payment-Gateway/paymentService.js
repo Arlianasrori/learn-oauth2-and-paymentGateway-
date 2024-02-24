@@ -10,6 +10,7 @@ const payment = async (body,user) => {
     
     body.transaction_details.order_id = idOrder
     const auth = btoa(`${process.env.PAYMENT_SERVER_KEY} :`)
+    console.log(auth);
 
     const response = await axios({
         method : "post",
